@@ -1,0 +1,16 @@
+<RCC>
+    <qresource prefix="/">
+        <file>img/VAL_OFF.png</file>
+        <file>img/VAL_ON.png</file>
+        <file>img/MV_ON.png</file>
+        <file>img/FC_ON.png</file>
+        <file>img/FC_OFF.png</file>
+        <file>img/MV_OFF.png</file>
+        <file>img/KVB_haut.png</file>
+        <file>img/LSSF_ON.png</file>
+        <file>img/LSSF_OFF.png</file>
+        <file>img/Lampe_OFF.png</file>
+        <file>img/Lampe_ON.png</file>
+        <file>img/Lampe_engin_ON.png</file>
+    </qresource>
+</RCC>
