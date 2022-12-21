@@ -8,6 +8,8 @@
 #include <QJsonObject>
 #include <QClipboard>
 #include <QSerialPort>
+#include <QSerialPortInfo>
+#include <QTextCursor>
 
 
 QT_BEGIN_NAMESPACE
@@ -55,13 +57,27 @@ private slots:
 
     void on_PanneEnginBtn_toggled(bool checked);
 
+    void on_GenNGBtn_clicked();
+
+    void on_scanSerialPortBtn_clicked();
+
+    void on_cleanBtn_clicked();
+
+    void on_parseJsonBtn_clicked();
+
 private:
     QSerialPort *port;
+    QString inData;
     Ui::MainWindow *ui;
     void loadTextFile(void);
     QString generateJSON(void);
     QString generateJSONNG(void);
     QString generateAndSet(void);
     QString generateAndSetNG(void);
+    void getSerialPorts(void);
+    void readData(void);
+    void setTextToSerialPortError();
+    QVariantMap parseJson(QByteArray);
+
 };
 #endif // MAINWINDOW_H

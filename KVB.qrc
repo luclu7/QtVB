@@ -12,5 +12,7 @@
         <file>img/Lampe_OFF.png</file>
         <file>img/Lampe_ON.png</file>
         <file>img/Lampe_engin_ON.png</file>
+        <file>img/TEST.png</file>
+        <file>img/BPSF.png</file>
     </qresource>
 </RCC>
