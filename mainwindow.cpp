@@ -183,7 +183,7 @@ void MainWindow::readData()
 
     qDebug() << this->inData[inData.length()-1];
 
-    if(dataStr[dataStr.length()-1] == "\n") {
+    if(dataStr[dataStr.length()-1] == '\n') {
         QVariantMap a = parseJson(inData.toLocal8Bit());
         ui->JSONTextEditNG_2->setText(inData);
 
@@ -339,7 +339,15 @@ void MainWindow::on_cleanBtn_clicked()
 void MainWindow::on_parseJsonBtn_clicked()
 {
 
+    QString data = ui->JSONTextEditNG_2->toPlainText();
 
+    QVariantMap parsedJson = parseJson(data.toLocal8Bit());
+
+    ui->DecVALBtn->setChecked(parsedJson["VAL"].toBool());
+    ui->DecMVBtn->setChecked(parsedJson["MV"].toBool());
+    ui->DecFCBtn->setChecked(parsedJson["FC"].toBool());
+    ui->DecTESTBtn->setChecked(parsedJson["TEST"].toBool());
+    ui->DecBPSFBtn->setChecked(parsedJson["SF"].toBool());
 
 }
 
