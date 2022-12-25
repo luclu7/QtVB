@@ -126,7 +126,7 @@ void MainWindow::on_connectSerialBtn_clicked()
     //    this->port->open(QIODevice::ReadWrite);
 
     if(this->port->open(QIODevice::ReadWrite)){
-        if(!this->port->setBaudRate(QSerialPort::Baud115200)) {
+        if(!this->port->setBaudRate(ui->baudRatesBox->currentText().toInt())) {
         }
 
 
@@ -202,8 +202,13 @@ void MainWindow::getSerialPorts(void) {
     foreach(QSerialPortInfo port, QSerialPortInfo::availablePorts()) {
         ui->serialPortsBox->addItem(port.portName());
     }
-}
 
+    foreach(const int baudRate, QSerialPortInfo::standardBaudRates()) {
+        ui->baudRatesBox->addItem(QString::number(baudRate));
+    }
+
+    ui->baudRatesBox->setCurrentText("115200");
+}
 
 void MainWindow::on_genSendSerialBtn_clicked()
 {
@@ -224,51 +229,6 @@ void MainWindow::on_disconnectSerialBtn_clicked()
     ui->disconnectSerialBtn->setEnabled(false);
 }
 
-
-void MainWindow::on_VALbtn_toggled(bool checked)
-{
-    if(checked) {
-        ui->VALbtn->setIcon(QIcon(":/img/VAL_ON.png"));
-    } else {
-        ui->VALbtn->setIcon(QIcon(":/img/VAL_OFF.png"));
-    }
-}
-
-
-void MainWindow::on_MVbtn_toggled(bool checked)
-{
-    if(checked) {
-        ui->MVbtn->setIcon(QIcon(":/img/MV_ON.png"));
-    } else {
-        ui->MVbtn->setIcon(QIcon(":/img/MV_OFF.png"));
-    }
-}
-
-void MainWindow::on_FCbtn_toggled(bool checked)
-{
-    if(checked) {
-        ui->FCbtn->setIcon(QIcon(":/img/FC_ON.png"));
-    } else {
-        ui->FCbtn->setIcon(QIcon(":/img/FC_OFF.png"));
-    }
-}
-
-
-void MainWindow::on_LSSFbtn_toggled(bool checked)
-{
-    if(checked) {
-        ui->LSSFbtn->setIcon(QIcon(":/img/LSSF_ON.png"));
-    } else {
-        ui->LSSFbtn->setIcon(QIcon(":/img/LSSF_OFF.png"));
-    }
-}
-
-void MainWindow::on_genNGBtn_clicked()
-{
-    generateAndSetNG();
-}
-
-
 void MainWindow::on_GenCopyNGBtn_clicked()
 {
     QString toCopy = generateAndSetNG();
@@ -282,46 +242,6 @@ void MainWindow::on_GenSerialNGBtn_clicked()
 {
     QString toSend = generateAndSetNG();
     this->port->write(toSend.toStdString().c_str(), toSend.size());
-}
-
-
-void MainWindow::on_LSVBtn_toggled(bool checked)
-{
-    if(checked) {
-        ui->LSVBtn->setIcon(QIcon(":/img/Lampe_ON.png"));
-    } else {
-        ui->LSVBtn->setIcon(QIcon(":/img/Lampe_OFF.png"));
-    }
-}
-
-
-void MainWindow::on_LSFUBtn_toggled(bool checked)
-{
-    if(checked) {
-        ui->LSFUBtn->setIcon(QIcon(":/img/Lampe_ON.png"));
-    } else {
-        ui->LSFUBtn->setIcon(QIcon(":/img/Lampe_OFF.png"));
-    }
-}
-
-
-void MainWindow::on_PanneSolBtn_toggled(bool checked)
-{
-    if(checked) {
-        ui->PanneSolBtn->setIcon(QIcon(":/img/Lampe_ON.png"));
-    } else {
-        ui->PanneSolBtn->setIcon(QIcon(":/img/Lampe_OFF.png"));
-    }
-}
-
-
-void MainWindow::on_PanneEnginBtn_toggled(bool checked)
-{
-    if(checked) {
-        ui->PanneEnginBtn->setIcon(QIcon(":/img/Lampe_engin_ON.png"));
-    } else {
-        ui->PanneEnginBtn->setIcon(QIcon(":/img/Lampe_OFF.png"));
-    }
 }
 
 void MainWindow::on_scanSerialPortBtn_clicked()
@@ -375,5 +295,53 @@ QVariantMap MainWindow::parseJson(QByteArray json_bytes) {
     QVariantMap a = json_obj.toVariantMap();
 
     return a;
+}
+
+
+void MainWindow::on_LSSFbtn_toggled(bool checked)
+{
+    if(checked) {
+        ui->LSSFbtn->setIcon(QIcon(":/img/LSSF_ON.png"));
+    } else {
+        ui->LSSFbtn->setIcon(QIcon(":/img/LSSF_OFF.png"));
+    }
+}
+
+void MainWindow::setAllButtons(bool value) {
+    ui->VALbtn->setChecked(value);
+    ui->MVbtn->setChecked(value);
+    ui->FCbtn->setChecked(value);
+    ui->LSSFbtn->setChecked(value);
+
+    ui->LSVBtn->setChecked(value);
+    ui->LSFUBtn->setChecked(value);
+    ui->PanneSolBtn->setChecked(value);
+    ui->PanneEnginBtn->setChecked(value);
+
+}
+
+void MainWindow::on_clearAll_clicked()
+{
+    setAllButtons(false);
+}
+
+void MainWindow::on_lightAll_clicked()
+{
+    setAllButtons(true);
+}
+
+
+void MainWindow::on_invertLights_clicked()
+{
+    ui->VALbtn->toggle();
+    ui->MVbtn->toggle();
+    ui->FCbtn->toggle();
+    ui->LSSFbtn->toggle();
+
+    ui->LSVBtn->toggle();
+    ui->LSFUBtn->toggle();
+    ui->PanneSolBtn->toggle();
+    ui->PanneEnginBtn->toggle();
+
 }
 

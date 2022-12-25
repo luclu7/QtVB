@@ -35,35 +35,25 @@ private slots:
 
     void on_disconnectSerialBtn_clicked();
 
-    void on_VALbtn_toggled(bool checked);
-
-    void on_MVbtn_toggled(bool checked);
-
-    void on_FCbtn_toggled(bool checked);
-
-    void on_LSSFbtn_toggled(bool checked);
-
-    void on_genNGBtn_clicked();
+    void on_GenNGBtn_clicked();
 
     void on_GenCopyNGBtn_clicked();
 
     void on_GenSerialNGBtn_clicked();
-
-    void on_LSVBtn_toggled(bool checked);
-
-    void on_LSFUBtn_toggled(bool checked);
-
-    void on_PanneSolBtn_toggled(bool checked);
-
-    void on_PanneEnginBtn_toggled(bool checked);
-
-    void on_GenNGBtn_clicked();
 
     void on_scanSerialPortBtn_clicked();
 
     void on_cleanBtn_clicked();
 
     void on_parseJsonBtn_clicked();
+
+    void on_LSSFbtn_toggled(bool checked);
+
+    void on_clearAll_clicked();
+
+    void on_lightAll_clicked();
+
+    void on_invertLights_clicked();
 
 private:
     QSerialPort *port;
@@ -78,6 +68,7 @@ private:
     void readData(void);
     void setTextToSerialPortError();
     QVariantMap parseJson(QByteArray);
+    void setAllButtons(bool);
 
 };
 #endif // MAINWINDOW_H
